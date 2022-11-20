@@ -28,8 +28,6 @@ endif()
 
 find_program(CXXBRIDGE cxxbridge REQUIRED PATHS $ENV{HOME}/.cargo/bin)
 message(STATUS "Found cxxbridge: ${CXXBRIDGE}")
-find_program(CBINDGEN cbindgen REQUIRED PATHS $ENV{HOME}/.cargo/bin)
-message(STATUS "Found cbindgen: ${CBINDGEN}")
 find_program(CARGO cargo REQUIRED PATHS $ENV{HOME}/.cargo/bin)
 message(STATUS "Found cargo: ${CARGO}")
 find_package(spdlog REQUIRED CONFIG)
@@ -39,7 +37,7 @@ set(CXXBRIDGE_IN ${CMAKE_CURRENT_SOURCE_DIR}/src/rs/cxxbridge.rs)
 set(CXXBRIDGE_SOURCE_OUT ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp/_cxxbridge.cpp)
 set(CXXBRIDGE_HEADER_OUT ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}/_cxxbridge.h)
 set(CXXBRIDGE_OUT ${CMAKE_CURRENT_SOURCE_DIR}/include/_cxx.h)
-set(CXXBRIDGE_ARGS "--cxx-impl-annotations" "RUSTYF4SE_SYMBOL_EXPORT")
+set(CXXBRIDGE_ARGS "--cxx-impl-annotations" "EXPORT_THIS")
 add_custom_command(
   OUTPUT ${CXXBRIDGE_OUT} ${CXXBRIDGE_SOURCE_OUT} ${CXXBRIDGE_HEADER_OUT} BINDING_1
   COMMAND ${CXXBRIDGE} --header --output ${CXXBRIDGE_OUT}
@@ -48,14 +46,6 @@ add_custom_command(
   COMMENT "Generating CXX Bridge: ${CXXBRIDGE_HEADER_OUT} ${CXXBRIDGE_SOURCE_OUT} ${CXXBRIDGE_OUT}"
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
   DEPENDS ${CXXBRIDGE_IN})
-
-# Generate cbindgen files.
-set(CBINDGEN_OUT ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}/_cbindgen.h)
-add_custom_command(
-  OUTPUT ${CBINDGEN_OUT} BINDING_2
-  COMMAND ${CBINDGEN} --config "cbindgen.toml" --crate "${PROJECT_NAME}" --output ${CBINDGEN_OUT}
-  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-  COMMENT "Generating cbindgen: ${CBINDGEN_OUT}")
 
 # Generate Rust library.
 set(RUST_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/target/release")
@@ -71,8 +61,12 @@ message(STATUS "Rust library: " ${RUST_LINKTIME_FILE})
 
 # Force cmake to generate bindings
 add_custom_target(
-  BUILD_RUST ALL
-  DEPENDS BINDING_1 BINDING_2 RUST
+  GENERATE_BINDINGS ALL
+  DEPENDS BINDING_1 BINDING_2
+)
+add_custom_target(
+  BUILD_RUST
+  DEPENDS GENERATE_BINDINGS RUST
 )
 add_dependencies(${PROJECT_NAME} BUILD_RUST)
 

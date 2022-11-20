@@ -8,27 +8,11 @@
 
 namespace rustyf4se {
 
-    class ThingC {
-    public:
-        RUSTYF4SE_SYMBOL_EXPORT
-        ThingC(std::string appname);
-
-        RUSTYF4SE_SYMBOL_EXPORT
-        ~ThingC();
-
-        std::string appname;
-    };
-
-    struct SharedThing;
-
-    RUSTYF4SE_SYMBOL_EXPORT
-    std::unique_ptr <ThingC> make_demo(rust::Str appname);
-
-    RUSTYF4SE_SYMBOL_EXPORT
-    const std::string &get_name(const ThingC &thing);
-
-    RUSTYF4SE_SYMBOL_EXPORT
-    void do_thing(SharedThing state);
+    EXPORT_THIS
+    void log_info(rust::Str text);
+    
+    EXPORT_THIS
+    void log_warning(rust::Str text);
 
 } // namespace rustyf4se
 

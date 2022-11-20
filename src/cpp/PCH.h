@@ -6,11 +6,7 @@
 
 namespace WinAPI = F4SE::WinAPI;
 
-#ifdef NDEBUG
-#	include <spdlog/sinks/basic_file_sink.h>
-#else
-#	include <spdlog/sinks/msvc_sink.h>
-#endif
+#include <spdlog/sinks/basic_file_sink.h>
 #pragma warning(pop)
 
 #define DLLEXPORT __declspec(dllexport)
