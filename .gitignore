@@ -7,3 +7,6 @@
 **/*.rs.bk
 Cargo.lock
 *~
+_cxx.h
+_cxxbridge.*
+_cbindgen.h

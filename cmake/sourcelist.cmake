@@ -1,0 +1,35 @@
+set(SOURCES
+	src/cpp/PCH.h
+	src/cpp/Papyrus/Actor.h
+	src/cpp/Papyrus/ActorBase.h
+	src/cpp/Papyrus/Armor.h
+	src/cpp/Papyrus/ArmorAddon.h
+	src/cpp/Papyrus/Cell.h
+	src/cpp/Papyrus/Common.h
+	src/cpp/Papyrus/Component.h
+	src/cpp/Papyrus/ConstructibleObject.h
+	src/cpp/Papyrus/DefaultObject.h
+	src/cpp/Papyrus/EncounterZone.h
+	src/cpp/Papyrus/EquipSlot.h
+	src/cpp/Papyrus/F4SE.h
+	src/cpp/Papyrus/Form.h
+	src/cpp/Papyrus/Game.h
+	src/cpp/Papyrus/HeadPart.h
+	src/cpp/Papyrus/Input.h
+	src/cpp/Papyrus/InstanceData.h
+	src/cpp/Papyrus/Location.h
+	src/cpp/Papyrus/MatSwap.h
+	src/cpp/Papyrus/Math.h
+	src/cpp/Papyrus/MiscObject.h
+	src/cpp/Papyrus/ObjectMod.h
+	src/cpp/Papyrus/ObjectReference.h
+	src/cpp/Papyrus/Papyrus.cpp
+	src/cpp/Papyrus/Papyrus.h
+	src/cpp/Papyrus/Perk.h
+	src/cpp/Papyrus/ScriptObject.h
+	src/cpp/Papyrus/UI.h
+	src/cpp/Papyrus/Utility.h
+	src/cpp/Papyrus/WaterType.h
+	src/cpp/Papyrus/Weapon.h
+	src/cpp/lib.cpp
+)
