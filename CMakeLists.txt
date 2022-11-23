@@ -2,6 +2,16 @@ cmake_minimum_required(VERSION 3.20)
 
 include("cmake/sourcelist.cmake")
 
+option(COPY_BUILD "Copy the build output to the Fallout 4 directory." OFF)
+
+macro(set_from_environment VARIABLE)
+	if (NOT DEFINED ${VARIABLE} AND DEFINED ENV{${VARIABLE}})
+		set(${VARIABLE} $ENV{${VARIABLE}})
+	endif ()
+endmacro()
+
+set_from_environment(Fallout4Path)
+
 add_project(
 	TARGET_TYPE LIBRARY
 	LIBRARY_TYPE SHARED
@@ -61,14 +71,14 @@ message(STATUS "Rust library: " ${RUST_LINKTIME_FILE})
 
 # Force cmake to generate bindings
 add_custom_target(
-  GENERATE_BINDINGS ALL
+  ${PROJECT_NAME}_bindings ALL
   DEPENDS BINDING_1 BINDING_2
 )
 add_custom_target(
-  BUILD_RUST
-  DEPENDS GENERATE_BINDINGS RUST
+  ${PROJECT_NAME}_rust
+  DEPENDS ${PROJECT_NAME}_bindings RUST
 )
-add_dependencies(${PROJECT_NAME} BUILD_RUST)
+add_dependencies(${PROJECT_NAME} ${PROJECT_NAME}_rust)
 
 configure_file(
 	"${CMAKE_CURRENT_SOURCE_DIR}/cmake/Version.h.in"
@@ -127,3 +137,19 @@ install(
   include/
   DESTINATION "include"
   FILES_MATCHING PATTERN "*.h")
+
+if (COPY_BUILD)
+	if (DEFINED Fallout4Path)
+		add_custom_command(
+			TARGET ${PROJECT_NAME}
+			POST_BUILD
+			COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT_NAME}> ${Fallout4Path}/F4SE/Plugins/
+			COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_PDB_FILE:${PROJECT_NAME}> ${Fallout4Path}/F4SE/Plugins/
+		)
+	else ()
+		message(
+			WARNING
+			"Variable Fallout4Path is not defined. Skipping post-build copy command."
+		)
+	endif ()
+endif ()
