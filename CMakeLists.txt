@@ -18,7 +18,6 @@ add_project(
   PROJECT rustyf4se
   VERSION 1.0.0
 	INCLUDE_DIRECTORIES
-		"${CMAKE_CURRENT_SOURCE_DIR}/include"
 		"${CMAKE_CURRENT_BINARY_DIR}/include"
 		"${CMAKE_CURRENT_SOURCE_DIR}/src/cpp"
 	GROUPED_FILES
@@ -26,8 +25,6 @@ add_project(
 	MISC_FILES
 		"${CMAKE_CURRENT_BINARY_DIR}/include/Version.h"
 		"${CMAKE_CURRENT_BINARY_DIR}/version.rc"
-		"${CMAKE_CURRENT_SOURCE_DIR}/src/cpp/lib.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/cpp/_cxxbridge.cpp"
 	PRECOMPILED_HEADERS
 		"src/cpp/PCH.h"
 )
@@ -43,10 +40,10 @@ message(STATUS "Found cargo: ${CARGO}")
 find_package(spdlog REQUIRED CONFIG)
 
 # Generate CXX Bridge files.
-set(CXXBRIDGE_IN ${CMAKE_CURRENT_SOURCE_DIR}/src/rs/cxxbridge.rs)
+set(CXXBRIDGE_IN ${CMAKE_CURRENT_SOURCE_DIR}/src/rs/bridge.rs)
 set(CXXBRIDGE_SOURCE_OUT ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp/_cxxbridge.cpp)
-set(CXXBRIDGE_HEADER_OUT ${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}/_cxxbridge.h)
-set(CXXBRIDGE_OUT ${CMAKE_CURRENT_SOURCE_DIR}/include/_cxx.h)
+set(CXXBRIDGE_HEADER_OUT ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp/${PROJECT_NAME}/_cxxbridge.h)
+set(CXXBRIDGE_OUT ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp/_cxx.h)
 set(CXXBRIDGE_ARGS "--cxx-impl-annotations" "EXPORT_THIS")
 add_custom_command(
   OUTPUT ${CXXBRIDGE_OUT} ${CXXBRIDGE_SOURCE_OUT} ${CXXBRIDGE_HEADER_OUT} BINDING_1

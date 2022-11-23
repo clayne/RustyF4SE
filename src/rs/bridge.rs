@@ -1,11 +1,9 @@
 use ffi::{log_info, log_warning};
 
-#[cxx::bridge(namespace = rustyf4se)]
+#[cxx::bridge(namespace = bridge)]
 mod ffi {
     unsafe extern "C++" {
-        include!("rustyf4se/symbol_export.h");
-        include!("rustyf4se/cpp.h");
-        include!("rustyf4se.h");
+        include!("bridge.h");
 
         fn log_info(text: &str);
         fn log_warning(text: &str);

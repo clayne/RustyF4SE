@@ -1,1 +1,1 @@
-pub mod cxxbridge;
+pub mod bridge;

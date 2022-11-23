@@ -1,15 +1,8 @@
 #include <iostream>
-#include <rustyf4se.h>
+#include <bridge.h>
 #include "Papyrus/Papyrus.h"
 
-#define PROJECT_NAME "rustyf4se"
-
-namespace rustyf4se {
-
-void log_info(rust::Str text) {logger::info(std::string(text));}
-void log_warning(rust::Str text) {logger::warn(std::string(text));}
-
-} // namespace rustyf4se
+#define PROJECT_NAME "f4js"
 
 extern "C" DLLEXPORT bool F4SEAPI F4SEPlugin_Query(const F4SE::QueryInterface* a_f4se, F4SE::PluginInfo* a_info)
 {
@@ -55,7 +48,7 @@ extern "C" DLLEXPORT bool F4SEAPI F4SEPlugin_Load(const F4SE::LoadInterface* a_f
 	const auto papyrus = F4SE::GetPapyrusInterface();
 	papyrus->Register(Papyrus::Bind);
 
-    rustyf4se::introduce_yourself();
+	bridge::introduce_yourself();
 
 	return true;
 }

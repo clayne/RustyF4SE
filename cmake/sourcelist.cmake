@@ -31,5 +31,10 @@ set(SOURCES
 	src/cpp/Papyrus/Utility.h
 	src/cpp/Papyrus/WaterType.h
 	src/cpp/Papyrus/Weapon.h
-	src/cpp/lib.cpp
+	src/cpp/_cxx.h
+	src/cpp/_cxxbridge.cpp
+	src/cpp/_cxxbridge.h
+	src/cpp/bridge.cpp
+	src/cpp/bridge.h
+	src/cpp/main.cpp
 )

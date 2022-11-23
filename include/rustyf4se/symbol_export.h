@@ -1,6 +1,0 @@
-#ifndef RUSTYF4SE_SYMBOL_EXPORT_H
-#define RUSTYF4SE_SYMBOL_EXPORT_H
-
-#define EXPORT_THIS __declspec(dllexport)
-
-#endif // RUSTYF4SE_SYMBOL_EXPORT_H
