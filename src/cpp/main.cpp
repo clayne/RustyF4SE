@@ -2,7 +2,7 @@
 #include <bridge.h>
 #include "Papyrus/Papyrus.h"
 
-#define PROJECT_NAME "f4js"
+#define PROJECT_NAME "rustyf4se"
 
 extern "C" DLLEXPORT bool F4SEAPI F4SEPlugin_Query(const F4SE::QueryInterface* a_f4se, F4SE::PluginInfo* a_info)
 {
