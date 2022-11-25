@@ -42,7 +42,7 @@ find_package(spdlog REQUIRED CONFIG)
 # Generate CXX Bridge files.
 set(CXXBRIDGE_IN ${CMAKE_CURRENT_SOURCE_DIR}/src/rs/bridge.rs)
 set(CXXBRIDGE_SOURCE_OUT ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp/_cxxbridge.cpp)
-set(CXXBRIDGE_HEADER_OUT ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp/${PROJECT_NAME}/_cxxbridge.h)
+set(CXXBRIDGE_HEADER_OUT ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp/_cxxbridge.h)
 set(CXXBRIDGE_OUT ${CMAKE_CURRENT_SOURCE_DIR}/src/cpp/_cxx.h)
 set(CXXBRIDGE_ARGS "--cxx-impl-annotations" "EXPORT_THIS")
 add_custom_command(
