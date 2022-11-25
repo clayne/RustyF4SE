@@ -57,7 +57,7 @@ add_custom_command(
 # Generate Rust library.
 set(RUST_BUILD_DIR "${CMAKE_CURRENT_SOURCE_DIR}/target/release")
 set(RUST_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include")
-set(RUST_LINKTIME_FILE "${CMAKE_CURRENT_SOURCE_DIR}/target/release/${PROJECT_NAME}.lib")
+set(RUST_LINKTIME_FILE "${CMAKE_CURRENT_SOURCE_DIR}/target/release/rust_static_library.lib")
 add_custom_command(
   OUTPUT ${RUST_LINKTIME_FILE} RUST
   COMMAND ${CARGO} build --release

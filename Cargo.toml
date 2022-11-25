@@ -6,7 +6,7 @@ edition = "2018"
 publish = false
 
 [lib]
-name = "rustyf4se"
+name = "rust_static_library"
 path = "./src/rs/lib.rs"
 crate_type = ["staticlib"]
 
